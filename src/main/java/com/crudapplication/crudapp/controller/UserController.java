@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000") // Allow all origins
+@CrossOrigin(origins = "https://student-management-by-prathamesh.netlify.app/") // Allow all origins
 @RestController
 @RequestMapping("/api/v1") // Corrected base path
 public class UserController {
