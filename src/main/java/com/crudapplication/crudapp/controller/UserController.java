@@ -25,25 +25,25 @@ public class UserController {
     }
 
     // @PostMapping("/users")
-    @PostMapping("/save")
+    @PostMapping("/api/v1/save")
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
 
     // @GetMapping("/users")
-    @GetMapping("/")
+    @GetMapping("/api/v1")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/api/v1/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = null;
         user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/api/v1/delete/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteEmployee(@PathVariable("id") Long id) {
         boolean deleted = false;
         deleted =userService.deleteUser(id);
