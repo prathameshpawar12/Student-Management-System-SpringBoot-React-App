@@ -1,8 +1,7 @@
 package com.crudapplication.crudapp.controller;
-//made by prathamesh pawar
 
+// Made by Prathamesh Pawar
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(value = "*")
+@CrossOrigin(origins = "*") // Allow all origins
 @RestController
-@RequestMapping("https://student-management-system-spring-production.up.railway.app/api/v1")
+@RequestMapping("/api/v1") // Corrected base path
 public class UserController {
 
     private final UserService userService;
@@ -24,39 +23,33 @@ public class UserController {
         this.userService = userService;
     }
 
-    // @PostMapping("/users")
-    @PostMapping("/api/v1/save")
+    @PostMapping("/save") // Corrected endpoint
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
 
-    // @GetMapping("/users")
-    @GetMapping("/api/v1")
+    @GetMapping("/") // Corrected endpoint
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/api/v1/{id}")
+    @GetMapping("/{id}") // Corrected endpoint
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
-        User user = null;
-        user = userService.getUserById(id);
+        User user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
-    @DeleteMapping("/api/v1/delete/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteEmployee(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        deleted =userService.deleteUser(id);
-        Map<String,Boolean> response = new HashMap<>();
+    @DeleteMapping("/delete/{id}") // Corrected endpoint
+    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable("id") Long id) {
+        boolean deleted = userService.deleteUser(id);
+        Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
-                                           @RequestBody User user) {
-        user = userService.updateUser(id,user);
+    @PutMapping("/update/{id}") // Corrected endpoint
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+        user = userService.updateUser(id, user);
         return ResponseEntity.ok(user);
     }
-
 }
